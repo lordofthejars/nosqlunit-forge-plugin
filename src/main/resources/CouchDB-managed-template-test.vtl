@@ -1,0 +1,32 @@
+package $package;
+
+import static com.lordofthejars.nosqlunit.couchdb.ManagedCouchDb.ManagedCouchDbRuleBuilder.newManagedCouchDbRule;
+import static com.lordofthejars.nosqlunit.couchdb.CouchDbRule.CouchDbRuleBuilder.newCouchDbRule;
+
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+
+import com.lordofthejars.nosqlunit.annotation.UsingDataSet;
+import com.lordofthejars.nosqlunit.core.LoadStrategyEnum;
+import com.lordofthejars.nosqlunit.couchdb.CouchDbRule;
+import com.lordofthejars.nosqlunit.couchdb.ManagedCouchDb;
+
+@UsingDataSet(locations="couchdb-initial-data.json", loadStrategy=LoadStrategyEnum.CLEAN_INSERT)
+public class $classname {
+
+	@ClassRule
+	public static ManagedCouchDb MANAGED_COUCH_DB = newManagedCouchDbRule().couchDbPath("$path").build(); 
+	
+	@Rule
+	public CouchDbRule couchDbRule = newCouchDbRule().defaultManagedMongoDb("$database");
+	
+	
+	#foreach( $method in $methods )
+@Test
+	public void $method () {
+		
+	}
+	#end
+	
+}

@@ -1,0 +1,30 @@
+package $package;
+
+import static com.lordofthejars.nosqlunit.neo4j.ManagedNeoServerConfigurationBuilder.newManagedNeoServerConfiguration;
+import static com.lordofthejars.nosqlunit.neo4j.Neo4jRule.Neo4jRuleBuilder.newNeo4jRule;
+
+import org.junit.Rule;
+import org.junit.Test;
+
+import com.lordofthejars.nosqlunit.annotation.UsingDataSet;
+import com.lordofthejars.nosqlunit.core.LoadStrategyEnum;
+import com.lordofthejars.nosqlunit.neo4j.Neo4jRule;
+
+@UsingDataSet(locations="neo4j-initial-data.xml", loadStrategy=LoadStrategyEnum.CLEAN_INSERT)
+public class $classname {
+
+	@Rule
+	public Neo4jRule neo4jRule = newNeo4jRule().configure(newManagedNeoServerConfiguration()
+						   .uri("http://$host:$port/$database")
+						   .build()
+					       )
+					   .build();
+	
+	#foreach( $method in $methods )	
+@Test
+	public void $method () {
+
+	}
+	#end
+	
+}

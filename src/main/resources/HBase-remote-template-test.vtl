@@ -1,0 +1,31 @@
+package $package;
+
+import static com.lordofthejars.nosqlunit.hbase.RemoteHBaseConfigurationBuilder.newRemoteHBaseConfiguration;
+import static com.lordofthejars.nosqlunit.hbase.HBaseRule.HBaseRuleBuilder.newHBaseRule;
+
+import org.junit.Rule;
+import org.junit.Test;
+
+import com.lordofthejars.nosqlunit.annotation.UsingDataSet;
+import com.lordofthejars.nosqlunit.core.LoadStrategyEnum;
+import com.lordofthejars.nosqlunit.hbase.HBaseRule;
+
+@UsingDataSet(locations="hbase-initial-data.json", loadStrategy=LoadStrategyEnum.CLEAN_INSERT)
+public class $classname {
+	
+	@Rule
+	public HBaseRule hBaseRule = newHBaseRule().configure(newRemoteHBaseConfiguration()
+							.setProperty("hbase.zookeeper.quorum", "$host")
+							.setProperty("hbase.zookeeper.property.clientPort", "$port")
+							.build()
+							)
+						.build();
+	
+	#foreach( $method in $methods )
+@Test
+	public void $method () {
+		
+	}
+	#end
+	
+}

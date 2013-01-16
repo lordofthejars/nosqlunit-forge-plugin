@@ -1,0 +1,31 @@
+package $package;
+
+import static com.lordofthejars.nosqlunit.mongodb.ManagedMongoDb.MongoServerRuleBuilder.newManagedMongoDbRule;
+import static com.lordofthejars.nosqlunit.mongodb.MongoDbRule.MongoDbRuleBuilder.newMongoDbRule;
+
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+
+import com.lordofthejars.nosqlunit.annotation.UsingDataSet;
+import com.lordofthejars.nosqlunit.core.LoadStrategyEnum;
+import com.lordofthejars.nosqlunit.mongodb.ManagedMongoDb;
+import com.lordofthejars.nosqlunit.mongodb.MongoDbRule;
+
+@UsingDataSet(locations="mongo-initial-data.json", loadStrategy=LoadStrategyEnum.CLEAN_INSERT)
+public class $classname {
+
+	@ClassRule
+	public static ManagedMongoDb MANAGED_MONGO_DB = newManagedMongoDbRule().mongodPath("$path").build();
+	
+	@Rule
+	public MongoDbRule managedMongoDbRule =  newMongoDbRule().defaultManagedMongoDb("$database");
+	
+	#foreach( $method in $methods )
+@Test
+	public void $method () {
+		
+	}
+	#end
+	
+}

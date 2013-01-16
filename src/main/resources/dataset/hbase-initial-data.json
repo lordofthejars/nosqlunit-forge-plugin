@@ -1,0 +1,28 @@
+{
+    "name" : "tablename",
+    "columnFamilies" : [{
+        "name" : "columnFamilyName",
+        "rows" : [{
+            "key" : "key1",
+            "columns" : [{
+                "name" : "col1",
+                "value" : "val1"
+            },
+            {
+                "name" : "col2",
+                "value" : "val2"
+            }]
+        },
+        {
+            "key" : "key2",
+            "columns" : [{
+                "name" : "col1",
+                "value" : "val1"
+            },
+            {
+                "name" : "col2",
+                "value" : "val2"
+            }]
+        }]
+    }]
+}

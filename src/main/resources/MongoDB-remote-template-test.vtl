@@ -1,0 +1,32 @@
+package $package;
+
+import static com.lordofthejars.nosqlunit.mongodb.MongoDbConfigurationBuilder.mongoDb;
+import static com.lordofthejars.nosqlunit.mongodb.MongoDbRule.MongoDbRuleBuilder.newMongoDbRule;
+
+import org.junit.Rule;
+import org.junit.Test;
+
+import com.lordofthejars.nosqlunit.annotation.UsingDataSet;
+import com.lordofthejars.nosqlunit.core.LoadStrategyEnum;
+import com.lordofthejars.nosqlunit.mongodb.InMemoryMongoDb;
+import com.lordofthejars.nosqlunit.mongodb.MongoDbRule;
+
+@UsingDataSet(locations="mongo-initial-data.json", loadStrategy=LoadStrategyEnum.CLEAN_INSERT)
+public class $classname {
+
+	@Rule
+	public MongoDbRule remoteMongoDbRule = newMongoDbRule().configure(mongoDb().host("$host")
+										   .port($port)
+										   .databaseName("$database")
+										   .build()
+										   )
+									   .build();
+					
+	#foreach( $method in $methods )
+@Test
+	public void $method() {
+
+	}
+	#end
+	
+}

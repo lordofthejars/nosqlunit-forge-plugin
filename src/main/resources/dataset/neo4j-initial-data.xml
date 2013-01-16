@@ -1,0 +1,17 @@
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns
+        http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+    <key id="attr1" for="node" attr.name="attr1" attr.type="string"/>
+    <key id="attr2" for="edge" attr.name="attr2" attr.type="string"/>
+    <graph id="G" edgedefault="directed">
+        <node id="1">
+            <data key="attr1">val1</data>
+        </node>
+        <node id="2">
+            <data key="attr1">val2</data>
+        </node>
+        <edge id="1" source="0" target="1" label="LABEL">
+         	<data key="attr2">val3</data>
+        </edge>
+    </graph>

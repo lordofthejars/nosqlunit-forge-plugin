@@ -1,0 +1,31 @@
+package $package;
+
+import static com.lordofthejars.nosqlunit.neo4j.InMemoryNeo4j.InMemoryNeo4jRuleBuilder.newInMemoryNeo4j;
+import static com.lordofthejars.nosqlunit.neo4j.Neo4jRule.Neo4jRuleBuilder.newNeo4jRule;
+
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+
+import com.lordofthejars.nosqlunit.annotation.UsingDataSet;
+import com.lordofthejars.nosqlunit.core.LoadStrategyEnum;
+import com.lordofthejars.nosqlunit.neo4j.InMemoryNeo4j;
+import com.lordofthejars.nosqlunit.neo4j.Neo4jRule;
+
+@UsingDataSet(locations="neo4j-initial-data.xml", loadStrategy=LoadStrategyEnum.CLEAN_INSERT)
+public class $classname {
+
+	@ClassRule
+	public static InMemoryNeo4j inMemoryNeo4j = newInMemoryNeo4j().build();
+	
+	@Rule
+	public Neo4jRule neo4jRule = newNeo4jRule().defaultEmbeddedNeo4j();
+	
+	#foreach( $method in $methods )	
+@Test
+	public void $method () {
+		
+	}
+	#end	
+	
+}

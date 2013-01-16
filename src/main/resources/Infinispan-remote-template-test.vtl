@@ -1,0 +1,31 @@
+package $package;
+
+import static com.lordofthejars.nosqlunit.infinispan.RemoteInfinispanConfigurationBuilder.newRemoteInfinispanConfiguration;
+import static com.lordofthejars.nosqlunit.infinispan.InfinispanRule.InfinispanRuleBuilder.newInfinispanRule;
+
+import org.junit.Rule;
+import org.junit.Test;
+
+import com.lordofthejars.nosqlunit.annotation.UsingDataSet;
+import com.lordofthejars.nosqlunit.core.LoadStrategyEnum;
+import com.lordofthejars.nosqlunit.infinispan.InfinispanRule;
+
+@UsingDataSet(locations="infinispan-initial-data.json", loadStrategy=LoadStrategyEnum.CLEAN_INSERT)
+public class $classname {
+
+	@Rule
+	public final InfinispanRule infinispanRule = newInfinispanRule().configure(newRemoteInfinispanConfiguration()
+									.host("$host")
+									.port($port)
+									.build()
+									)
+								.build();
+	
+	#foreach( $method in $methods )	
+@Test
+	public $method () {
+
+	}
+	#end
+	
+}

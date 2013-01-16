@@ -1,0 +1,36 @@
+package $package;
+
+import static com.lordofthejars.nosqlunit.mongodb.InMemoryMongoDb.InMemoryMongoRuleBuilder.newInMemoryMongoDbRule;
+import static com.lordofthejars.nosqlunit.mongodb.MongoDbRule.MongoDbRuleBuilder.newMongoDbRule;
+
+import static org.junit.Assert.assertThat;
+
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+
+import com.lordofthejars.nosqlunit.annotation.UsingDataSet;
+import com.lordofthejars.nosqlunit.core.LoadStrategyEnum;
+import com.lordofthejars.nosqlunit.mongodb.InMemoryMongoDb;
+import com.lordofthejars.nosqlunit.mongodb.MongoDbRule;
+
+
+@UsingDataSet(locations="mongo-initial-data.json", loadStrategy=LoadStrategyEnum.CLEAN_INSERT)
+public class $classname {
+
+	@ClassRule
+	public static final InMemoryMongoDb IN_MEMORY_MONGO_DB = newInMemoryMongoDbRule().build();
+	
+	@Rule
+	public MongoDbRule embeddedMongoDbRule = newMongoDbRule().defaultEmbeddedMongoDb("$database");
+	
+	#foreach( $method in $methods )
+@Test
+	public void $method () {
+		
+		
+	}
+	
+	#end
+	
+}

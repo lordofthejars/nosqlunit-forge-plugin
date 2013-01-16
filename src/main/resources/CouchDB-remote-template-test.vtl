@@ -1,0 +1,31 @@
+package $package;
+
+import static com.lordofthejars.nosqlunit.couchdb.RemoteCouchDbConfigurationBuilder.newRemoteCouchDbConfiguration;
+import static com.lordofthejars.nosqlunit.couchdb.CouchDbRule.CouchDbRuleBuilder.newCouchDbRule;
+
+import org.junit.Rule;
+import org.junit.Test;
+
+import com.lordofthejars.nosqlunit.annotation.UsingDataSet;
+import com.lordofthejars.nosqlunit.core.LoadStrategyEnum;
+import com.lordofthejars.nosqlunit.couchdb.CouchDbRule;
+
+@UsingDataSet(locations="couchdb-initial-data.json", loadStrategy=LoadStrategyEnum.CLEAN_INSERT)
+public class $classname {
+	
+	@Rule
+	public CouchDbRule couchDbRule = newCouchDbRule().configure(newRemoteCouchDbConfiguration()
+								.url("http://$host:$port")
+								.databaseName("$database")
+								.build()
+								)
+							.build();
+	
+	#foreach( $method in $methods )
+@Test
+	public void $method () {
+		
+	}
+	#end
+	
+}

@@ -1,0 +1,31 @@
+package $package;
+
+import static com.lordofthejars.nosqlunit.cassandra.RemoteCassandraConfigurationBuilder.newRemoteCassandraConfiguration;
+import static com.lordofthejars.nosqlunit.cassandra.CassandraRule.CassandraRuleBuilder.newCassandraRule;
+
+import org.junit.Rule;
+import org.junit.Test;
+
+import com.lordofthejars.nosqlunit.annotation.UsingDataSet;
+import com.lordofthejars.nosqlunit.cassandra.CassandraRule;
+import com.lordofthejars.nosqlunit.core.LoadStrategyEnum;
+
+@UsingDataSet(locations="cassandra-initial-data.json", loadStrategy=LoadStrategyEnum.CLEAN_INSERT)
+public class $classname {
+
+	@Rule
+	public CassandraRule cassandraRule = newCassandraRule().configure(newRemoteCassandraConfiguration().clusterName("$database")
+													.host("$host")
+													.port($port)
+													.build()
+													)
+												.build();
+	
+	#foreach( $method in $methods )	
+@Test
+	public void $method () {
+		
+	}
+	#end
+	
+}

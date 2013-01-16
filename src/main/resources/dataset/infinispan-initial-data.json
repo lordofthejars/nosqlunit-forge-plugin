@@ -1,0 +1,12 @@
+{ 
+	"data": [
+				{
+					"key":"key1", 
+					"implementation":"com..model.Model", 
+					"value": {
+								"name":"prop1",
+								"age":"val1"
+							 } 
+				}
+			] 
+}

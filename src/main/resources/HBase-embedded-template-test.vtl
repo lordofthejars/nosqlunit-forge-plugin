@@ -1,0 +1,31 @@
+package $package;
+
+import static com.lordofthejars.nosqlunit.hbase.EmbeddedHBase.EmbeddedHBaseRuleBuilder.newEmbeddedHBaseRule;
+import static com.lordofthejars.nosqlunit.hbase.HBaseRule.HBaseRuleBuilder.newHBaseRule;
+
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+
+import com.lordofthejars.nosqlunit.annotation.UsingDataSet;
+import com.lordofthejars.nosqlunit.core.LoadStrategyEnum;
+import com.lordofthejars.nosqlunit.hbase.EmbeddedHBase;
+import com.lordofthejars.nosqlunit.hbase.HBaseRule;
+
+@UsingDataSet(locations="hbase-initial-data.json", loadStrategy=LoadStrategyEnum.CLEAN_INSERT)
+public class $classname {
+
+	@ClassRule
+	public static EmbeddedHBase EMBEDDED_HBASE = newEmbeddedHBaseRule().build();
+	
+	@Rule
+	public HBaseRule hBaseRule = newHBaseRule().defaultEmbeddedHBase();
+	
+	#foreach( $method in $methods )
+@Test
+	public void $method () {
+		
+	}
+	#end
+	
+}

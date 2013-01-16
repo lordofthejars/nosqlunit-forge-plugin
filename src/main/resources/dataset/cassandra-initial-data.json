@@ -1,0 +1,31 @@
+{
+    "name" : "keyspace",
+    "columnFamilies" : [{
+        "name" : "columnFamilyName",
+	"keyType" : "UTF8Type",
+	"defaultColumnValueType" : "UTF8Type",
+	"comparatorType" : "UTF8Type",
+        "rows" : [{
+            "key" : "key1",
+            "columns" : [{
+                "name" : "colname1",
+                "value" : "colvalue1"
+            },
+            {
+                "name" : "colname2",
+                "value" : "colvalue2"
+            }]
+        },
+        {
+            "key" : "key2",
+            "columns" : [{
+                "name" : "colname1",
+                "value" : "colvalue1"
+            },
+            {
+                "name" : "colname2",
+                "value" : "colvalue2"
+            }]
+        }]
+    }]
+}

@@ -1,0 +1,31 @@
+package $package;
+
+import static com.lordofthejars.nosqlunit.hbase.ManagedHBase.HBaseRuleBuilder.newManagedHBaseServerRule;
+import static com.lordofthejars.nosqlunit.hbase.HBaseRule.HBaseRuleBuilder.newHBaseRule;
+
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+
+import com.lordofthejars.nosqlunit.annotation.UsingDataSet;
+import com.lordofthejars.nosqlunit.core.LoadStrategyEnum;
+import com.lordofthejars.nosqlunit.hbase.ManagedHBase;
+import com.lordofthejars.nosqlunit.hbase.HBaseRule;
+
+@UsingDataSet(locations="hbase-initial-data.json", loadStrategy=LoadStrategyEnum.CLEAN_INSERT)
+public class $classname {
+
+	@ClassRule
+	public static ManagedHBase managedHBase = newManagedHBaseServerRule().hBasePath("$path").build();
+	
+	@Rule
+	public HBaseRule hBaseRule = newHBaseRule().defaultManagedHBase();
+	
+	#foreach( $method in $methods )
+@Test
+	public void $method () {
+		
+	}
+	#end
+	
+}

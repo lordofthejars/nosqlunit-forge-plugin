@@ -1,0 +1,32 @@
+package $package;
+
+import static com.lordofthejars.nosqlunit.redis.EmbeddedRedis.EmbeddedRedisRuleBuilder.newEmbeddedRedisRule;
+import static com.lordofthejars.nosqlunit.redis.RedisRule.RedisRuleBuilder.newRedisRule;
+
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+
+import com.lordofthejars.nosqlunit.annotation.UsingDataSet;
+import com.lordofthejars.nosqlunit.core.LoadStrategyEnum;
+import com.lordofthejars.nosqlunit.redis.EmbeddedRedis;
+import com.lordofthejars.nosqlunit.redis.RedisRule;
+
+@UsingDataSet(locations="redis-initial-data.json", loadStrategy=LoadStrategyEnum.CLEAN_INSERT)
+public class $classname {
+
+
+	@ClassRule
+	public static EmbeddedRedis embeddedRedis = newEmbeddedRedisRule().build();
+
+	@Rule
+	public RedisRule redisRule = newRedisRule().defaultEmbeddedRedis();
+	
+	#foreach( $method in $methods )
+@Test
+	public void $method () {
+		
+	}
+	#end
+	
+}
