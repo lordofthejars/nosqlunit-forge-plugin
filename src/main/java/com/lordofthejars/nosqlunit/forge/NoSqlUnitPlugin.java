@@ -69,8 +69,8 @@ public class NoSqlUnitPlugin implements Plugin {
 	public void createUnitTest(PipeOut out,
 			@Option(name = "engine", required = true, completer = DatabaseCommandCompleter.class) String database,
 			@Option(name = "databaseName", required = true) String databaseName,
-			@Option(name = "classname", required = true) String classname,
-			@Option(name = "class", required = true, type = PromptType.JAVA_CLASS) JavaResource classUnderTest)
+			@Option(name = "classname", required = true, help="Test class name") String classname,
+			@Option(name = "class", required = true, type = PromptType.JAVA_CLASS, help="Class under test") JavaResource classUnderTest)
 			throws FileNotFoundException, ClassNotFoundException {
 
 		DatabaseEnum databaseEnum = databaseEnum(database);
@@ -91,8 +91,10 @@ public class NoSqlUnitPlugin implements Plugin {
 
 		FileResource<?> resource = (FileResource<?>) resources.getTestResourceFolder().getChild(datasetLocation(databaseEnum, testPackage));
 		
+		shell.print(resource.toString());
+		
 		if (!resource.exists()) {
-			InputStream datasetStream = Class.class.getResourceAsStream("/dataset/"+databaseEnum.getDatasetName());
+			InputStream datasetStream = NoSqlUnitPlugin.class.getResourceAsStream("/dataset/"+databaseEnum.getDatasetName());
 			resource.setContents(datasetStream);
 		}
 	}
@@ -114,10 +116,10 @@ public class NoSqlUnitPlugin implements Plugin {
 	@Command(value = "managed")
 	public void createManagedTest(PipeOut out,
 			@Option(name = "engine", required = true, completer = DatabaseCommandCompleter.class) String database,
-			@Option(name = "path", required = true) String path,
+			@Option(name = "path", required = true, help="Full path to installation directory") String path,
 			@Option(name = "databaseName", required = true) String databaseName,
-			@Option(name = "classname", required = true) String classname,
-			@Option(name = "class", required = true, type = PromptType.JAVA_CLASS) JavaResource classUnderTest)
+			@Option(name = "classname", required = true, help="Test class name") String classname,
+			@Option(name = "class", required = true, type = PromptType.JAVA_CLASS, help="Class under test") JavaResource classUnderTest)
 			throws FileNotFoundException, ClassNotFoundException {
 
 		DatabaseEnum databaseEnum = databaseEnum(database);
@@ -134,8 +136,8 @@ public class NoSqlUnitPlugin implements Plugin {
 			@Option(name = "engine", required = true, completer = DatabaseCommandCompleter.class) String database,
 			@Option(name = "host", required = true) String host, @Option(name = "port", required = true) int port,
 			@Option(name = "databaseName", required = true) String databaseName,
-			@Option(name = "classname", required = true) String classname,
-			@Option(name = "class", required = true, type = PromptType.JAVA_CLASS) JavaResource classUnderTest)
+			@Option(name = "classname", required = true, help="Test class name") String classname,
+			@Option(name = "class", required = true, type = PromptType.JAVA_CLASS, help="Class under test") JavaResource classUnderTest)
 			throws FileNotFoundException, ClassNotFoundException {
 
 		DatabaseEnum databaseEnum = databaseEnum(database);
@@ -209,11 +211,23 @@ public class NoSqlUnitPlugin implements Plugin {
 	}
 
 	private void setupDependency(DatabaseEnum databaseEnum) {
-
+		addJUnitDependency();
 		addNoSqlUnitConfiguredDependency(databaseEnum);
-
 	}
 
+	private void addJUnitDependency() {
+		Dependency junitDependency = DependencyBuilder.create().setGroupId("junit")
+				.setArtifactId("junit").setScopeType(ScopeType.TEST);
+		
+		DependencyFacet dependencyFacet = project.getFacet(DependencyFacet.class);
+
+		if (!dependencyFacet.hasEffectiveDependency(junitDependency)) {
+			List<Dependency> versions = dependencyFacet.resolveAvailableVersions(junitDependency);
+			dependencyFacet.addDirectDependency(DependencyUtil.getLatestNonSnapshotVersion(versions));
+		}
+		
+	}
+	
 	private void addNoSqlUnitConfiguredDependency(DatabaseEnum databaseEnum) {
 		Dependency nosqlDependency = DependencyBuilder.create().setGroupId("com.lordofthejars")
 				.setArtifactId(databaseEnum.getArtifact()).setScopeType(ScopeType.TEST);

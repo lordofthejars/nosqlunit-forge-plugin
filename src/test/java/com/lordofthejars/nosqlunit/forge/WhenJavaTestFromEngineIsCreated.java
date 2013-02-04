@@ -1,8 +1,10 @@
 package com.lordofthejars.nosqlunit.forge;
 
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
 
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -467,7 +469,7 @@ public class WhenJavaTestFromEngineIsCreated {
 			"		\n" + 
 			"}";
 	
-	private static final String NEO4J_MANAGED_TEST = "package $package;\n" + 
+	private static final String NEO4J_MANAGED_TEST = "package com.test;\n" + 
 			"\n" + 
 			"import static com.lordofthejars.nosqlunit.neo4j.ManagedWrappingNeoServer.ManagedWrappingNeoServerRuleBuilder.newWrappingNeoServerNeo4jRule;\n" + 
 			"import static com.lordofthejars.nosqlunit.neo4j.Neo4jRule.Neo4jRuleBuilder.newNeo4jRule;\n" + 
@@ -482,7 +484,7 @@ public class WhenJavaTestFromEngineIsCreated {
 			"import com.lordofthejars.nosqlunit.neo4j.Neo4jRule;\n" + 
 			"\n" + 
 			"@UsingDataSet(locations=\"neo4j-initial-data.xml\", loadStrategy=LoadStrategyEnum.CLEAN_INSERT)\n" + 
-			"public class $classname {\n" + 
+			"public class MyTest {\n" + 
 			"\n" + 
 			"	@ClassRule\n" + 
 			"	public static ManagedWrappingNeoServer managedWrappingNeoServer = newWrappingNeoServerNeo4jRule().build();\n" + 
@@ -490,13 +492,11 @@ public class WhenJavaTestFromEngineIsCreated {
 			"	@Rule\n" + 
 			"	public Neo4jRule neo4jRule = newNeo4jRule().defaultManagedNeo4j();\n" + 
 			"	\n" + 
-			"	#foreach( $method in $methods )	\n" + 
-			"@Test\n" + 
-			"	public void $method () {\n" + 
+			"	@Test\n" + 
+			"	public void myMethod () {\n" + 
 			"\n" + 
 			"	}\n" + 
-			"	#end\n" + 
-			"	\n" + 
+			"		\n" + 
 			"}";
 	
 	private static final String NEO4J_REMOTE_TEST = "package com.test;\n" + 
@@ -816,6 +816,62 @@ public class WhenJavaTestFromEngineIsCreated {
 		
 		assertThat(testClassContent, is(REDIS_REMOTE_TEST));
 		
+	}
+	
+	@Test
+	public void mongoDB_dataset_file_should_be_copied() {
+		
+		InputStream dataset = Class.class.getResourceAsStream("/dataset/"+DatabaseEnum.MONGODB.getDatasetName());
+		assertThat(dataset, is(notNullValue()));
+	
+	}
+	
+	@Test
+	public void cassandra_dataset_file_should_be_copied() {
+		
+		InputStream dataset = Class.class.getResourceAsStream("/dataset/"+DatabaseEnum.CASSANDRA.getDatasetName());
+		assertThat(dataset, is(notNullValue()));
+	
+	}
+	
+	@Test
+	public void couchDB_dataset_file_should_be_copied() {
+		
+		InputStream dataset = Class.class.getResourceAsStream("/dataset/"+DatabaseEnum.COUCHDB.getDatasetName());
+		assertThat(dataset, is(notNullValue()));
+	
+	}
+	
+	@Test
+	public void hBase_dataset_file_should_be_copied() {
+		
+		InputStream dataset = Class.class.getResourceAsStream("/dataset/"+DatabaseEnum.HBASE.getDatasetName());
+		assertThat(dataset, is(notNullValue()));
+	
+	}
+	
+	@Test
+	public void infinispan_dataset_file_should_be_copied() {
+		
+		InputStream dataset = Class.class.getResourceAsStream("/dataset/"+DatabaseEnum.INFINISPAN.getDatasetName());
+		assertThat(dataset, is(notNullValue()));
+	
+	}
+	
+	@Test
+	public void neo4j_dataset_file_should_be_copied() {
+		
+		InputStream dataset = Class.class.getResourceAsStream("/dataset/"+DatabaseEnum.NEO4J.getDatasetName());
+		assertThat(dataset, is(notNullValue()));
+	
+	}
+	
+	@Test
+	public void redis_dataset_file_should_be_copied() {
+		
+		InputStream dataset = Class.class.getResourceAsStream("/dataset/"+DatabaseEnum.REDIS.getDatasetName());
+		assertThat(dataset, is(notNullValue()));
+	
 	}
 	
 	private Map<Object, Object> remoteParameters() {
