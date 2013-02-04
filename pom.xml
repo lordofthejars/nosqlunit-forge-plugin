@@ -9,7 +9,7 @@
   </parent>
   <groupId>com.lordofthejars</groupId>
   <artifactId>nosqlunit-forge-plugin</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.0</version>
   <name>nosqlunit-forge-plugin</name>
   <description>JBoss Forge Plugin which provides scaffolding for NoSQLUnit tests.</description>
   <url>https://github.com/lordofthejars/nosqlunit-forge-plugin</url>
