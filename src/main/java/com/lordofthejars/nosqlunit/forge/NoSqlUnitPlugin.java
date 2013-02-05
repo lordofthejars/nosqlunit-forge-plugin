@@ -70,7 +70,7 @@ public class NoSqlUnitPlugin implements Plugin {
 			@Option(name = "engine", required = true, completer = DatabaseCommandCompleter.class) String database,
 			@Option(name = "databaseName", required = true) String databaseName,
 			@Option(name = "classname", required = true, help="Test class name") String classname,
-			@Option(name = "class", required = true, type = PromptType.JAVA_CLASS, help="Class under test") JavaResource classUnderTest)
+			@Option(name = "classUnderTest", required = true, type = PromptType.JAVA_CLASS, help="Class under test") JavaResource classUnderTest)
 			throws FileNotFoundException, ClassNotFoundException {
 
 		DatabaseEnum databaseEnum = databaseEnum(database);
@@ -119,7 +119,7 @@ public class NoSqlUnitPlugin implements Plugin {
 			@Option(name = "path", required = true, help="Full path to installation directory") String path,
 			@Option(name = "databaseName", required = true) String databaseName,
 			@Option(name = "classname", required = true, help="Test class name") String classname,
-			@Option(name = "class", required = true, type = PromptType.JAVA_CLASS, help="Class under test") JavaResource classUnderTest)
+			@Option(name = "classUnderTest", required = true, type = PromptType.JAVA_CLASS, help="Class under test") JavaResource classUnderTest)
 			throws FileNotFoundException, ClassNotFoundException {
 
 		DatabaseEnum databaseEnum = databaseEnum(database);
@@ -137,7 +137,7 @@ public class NoSqlUnitPlugin implements Plugin {
 			@Option(name = "host", required = true) String host, @Option(name = "port", required = true) int port,
 			@Option(name = "databaseName", required = true) String databaseName,
 			@Option(name = "classname", required = true, help="Test class name") String classname,
-			@Option(name = "class", required = true, type = PromptType.JAVA_CLASS, help="Class under test") JavaResource classUnderTest)
+			@Option(name = "classUnderTest", required = true, type = PromptType.JAVA_CLASS, help="Class under test") JavaResource classUnderTest)
 			throws FileNotFoundException, ClassNotFoundException {
 
 		DatabaseEnum databaseEnum = databaseEnum(database);
